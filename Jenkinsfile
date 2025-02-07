@@ -8,6 +8,18 @@ pipeline {
         PATH = "$JAVA_HOME/bin:$MAVEN_HOME/bin:$PATH"
     }
 
+ stage('Install Java 17') {
+     steps {
+        script {
+            sh '''
+            sudo apt update
+            sudo apt install -y openjdk-17-jdk
+            echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $HOME/.bashrc
+            echo "export PATH=$JAVA_HOME/bin:$PATH" >> $HOME/.bashrc
+            source $HOME/.bashrc
+            java -version
+            '''
+            
     stages {
         stage('Setup Environment') {
             steps {
